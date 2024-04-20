@@ -1,0 +1,19 @@
+spring:
+  datasourse:
+    url: jdbc:h2:mem:testdb
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    # схемы hibernate
+    #generate-ddl: false
+    generate-ddl: true
+
+    hibernate:
+      #ddl-auto: none
+      ddl-auto: create-drop
+
+    # Показываем запросы
+    show-sql: true

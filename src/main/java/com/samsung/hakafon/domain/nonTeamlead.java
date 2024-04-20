@@ -1,4 +1,6 @@
 package com.samsung.hakafon.domain;
 
-public class nonTeamlead extends User{
+public class nonTeamlead extends User {
+
+
 }
