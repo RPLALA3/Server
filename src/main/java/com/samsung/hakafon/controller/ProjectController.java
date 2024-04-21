@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping
 @RequiredArgsConstructor
 
 public class ProjectController {
@@ -30,12 +31,12 @@ public class ProjectController {
         return projectService.findById(id);
     }
 
-    @GetMapping("/project/{id}")
+    @PutMapping("/project/{id}")
     public Project update(@PathVariable Long id, @RequestBody Project pj) {
         return projectService.update(id, pj);
     }
 
-    @GetMapping("/project/{id}")
+    @DeleteMapping("/project/{id}")
     public void deleteById(@PathVariable Long id) {
         projectService.deleteById(id);
     }
