@@ -13,8 +13,8 @@ public interface ProjectService {
 
     Project findById(Long id);
 
-    Project update(Long id, Project pj);
+    Project update(Long id, Project pj, User user);
 
-    void deleteById(Long id);
+    void deleteById(Long id, User user);
 
 }

@@ -32,12 +32,12 @@ public class ProjectController {
     }
 
     @PutMapping  ("/project/{id}")
-    public Project update(@PathVariable Long id, @RequestBody Project pj) {
-        return projectService.update(id, pj);
+    public Project update(@PathVariable Long id, @RequestBody Project pj, @RequestBody User user) {
+        return projectService.update(id, pj, user);
     }
 
     @DeleteMapping("/project/{id}")
-    public void deleteById(@PathVariable Long id) {
-        projectService.deleteById(id);
+    public void deleteById(@PathVariable Long id, @RequestBody User user) {
+        projectService.deleteById(id, user);
     }
 }

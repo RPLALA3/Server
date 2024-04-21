@@ -18,6 +18,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project create(Project pj, User user) {
+
         if (!(user.getTeamrole().equals("Teamlead"))) throw new RuntimeException("You cant create project without teamlead role");
 
         pj.setTlId(user.getId());
@@ -32,16 +33,28 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project findById(Long id) {
+
         Optional<Project> projectOptional = projectRepository.findById(id);
         if (projectOptional.isEmpty()) throw new RuntimeException("Project with ID" + id + "does not exist");
 
         return projectOptional.get();
+
     }
 
     @Override
-    public Project update(Long id, Project pj) {
+    public Project update(Long id, Project pj, User user) {
+
+        if (!(user.getTeamrole().equals("Teamlead"))) throw new RuntimeException("You cant edit project without teamlead role");
+
         Optional<Project> projectOptional = projectRepository.findById(id);
-        if (projectOptional.isEmpty()) throw new RuntimeException("Project with ID" + id + "does not exist");
+
+        if (projectOptional.isEmpty()) {
+            throw new RuntimeException("Project with ID" + id + "does not exist");
+        }
+
+        if (!(projectOptional.get().getTlId().equals(user.getId()))) {
+            throw new RuntimeException("You cant update a project that doesnt belong to you");
+        }
 
         Project updateProject = projectOptional.get();
         updateProject.setDev1Id(pj.getDev1Id());
@@ -53,9 +66,22 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        projectRepository.deleteById(id);
-    }
+    public void deleteById(Long id, User user) {
 
+        if (!(user.getTeamrole().equals("Teamlead"))) throw new RuntimeException("You cant delete project without teamlead role");
+
+        Optional<Project> projectOptional = projectRepository.findById(id);
+
+        if (projectOptional.isEmpty()) {
+            throw new RuntimeException("Project with ID" + id + "does not exist");
+        }
+
+        if (!(projectOptional.get().getTlId().equals(user.getId()))) {
+            throw new RuntimeException("You cant delete a project that doesnt belong to you");
+        }
+
+        projectRepository.deleteById(id);
+
+    }
 
 }
