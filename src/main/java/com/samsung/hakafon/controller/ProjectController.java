@@ -31,7 +31,7 @@ public class ProjectController {
         return projectService.findById(id);
     }
 
-    @PutMapping("/project/{id}")
+    @PutMapping  ("/project/{id}")
     public Project update(@PathVariable Long id, @RequestBody Project pj) {
         return projectService.update(id, pj);
     }

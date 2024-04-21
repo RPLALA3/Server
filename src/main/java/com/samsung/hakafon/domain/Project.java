@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "ProjectTb")
+@Table(name = "projectTb")
 
 public class Project {
 
